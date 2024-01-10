@@ -12,7 +12,7 @@ using Telerik.WinControls.UI;
 
 namespace JapanElectronics_POS.Forms
 {
-    public partial class Company : RadForm
+    public partial class Company : Form
     {
 
         SqlConnection conn = null;

@@ -12,7 +12,7 @@ using Telerik.WinControls.UI;
 
 namespace JapanElectronics_POS.Forms
 {
-    public partial class Company : Form
+    public partial class Company : RadForm
     {
 
         SqlConnection conn = null;
@@ -43,9 +43,9 @@ namespace JapanElectronics_POS.Forms
                     {
                         // Assuming you have a DataGridView column named "CompanyName"
                         while (reader.Read())
-                        {
-                            int rowIndex = dgvCompany.Rows.Add();
-                            dgvCompany.Rows[rowIndex].Cells["CompanyName"].Value = reader["companyname"];
+                        { 
+                            dgvCompany.Rows.Add(reader["companyname"]);
+                           // dgvCompany.Rows[rowIndex].Cells["CompanyName"].Value = reader["companyname"];
                         }
                     }
                 }
@@ -89,5 +89,7 @@ namespace JapanElectronics_POS.Forms
           //  Dashboard dashboard = new Dashboard();
           //  dashboard.Show();
         }
+
+      
     }
 }

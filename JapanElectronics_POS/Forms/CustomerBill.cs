@@ -1,132 +1,88 @@
-﻿using System;
+﻿using Microsoft.Reporting.WinForms;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Drawing.Printing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Telerik.WinControls.UI;
 
 namespace JapanElectronics_POS.Forms
 {
-    public partial class CustomerBill : Form
+    public partial class CustomerBill : RadForm
     {
         SqlConnection conn = null;
         SqlCommand cmd = null;
         string ConString = Utility.Utility.GetConnectionString();
+        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         public CustomerBill()
         {
+            AutoScaleMode = AutoScaleMode.None;
+            reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            reportViewer1.Dock = DockStyle.Fill;
+            this.Controls.Add(reportViewer1);
             InitializeComponent();
-            FillModels();
-            txt_cnic.KeyPress += Txt_cnic_KeyPress;
-            txt_qty.KeyPress += Txt_qty_KeyPress;
-            txt_price.KeyPress += Txt_price_KeyPress;
-            txt_totalprice.KeyPress += Txt_totalprice_KeyPress;
-        }
-
-        private void Txt_totalprice_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != 8 && e.KeyChar != 127)
-            {
-                e.Handled = true;
-            }
-            // Ensure that only one decimal point is allowed
-            if (e.KeyChar == '.' && (sender as TextBox).Text.Contains("."))
-            {
-                e.Handled = true;
-            }
-        }
-        private void Txt_price_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != 8 && e.KeyChar != 127)
-            {
-                e.Handled = true;
-            }
-            // Ensure that only one decimal point is allowed
-            if (e.KeyChar == '.' && (sender as TextBox).Text.Contains("."))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void Txt_qty_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 127)
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void Txt_cnic_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 127)
-            {
-                e.Handled = true;
-            }
+            txt_date.Text = DateTime.Now.ToString();
         }
 
         private void CustomerBill_Load(object sender, EventArgs e)
         {
             this.ControlBox = false;
+           // this.reportViewer1.RefreshReport();         
         }
-        public void FillModels()
+
+        private void btn_save_Click(object sender, EventArgs e)
         {
-            DataTable data = new DataTable();
-
-            data.Columns.Add("ModelID", typeof(int));
-            data.Columns.Add("ModelName", typeof(string));
-
-            // Create a default row for 'Select' with a value of -1
-            DataRow defaultRow = data.NewRow();
-            defaultRow["ModelID"] = -1;
-            defaultRow["ModelName"] = "Select Model";
-            data.Rows.Add(defaultRow);
-
-            using (conn = new SqlConnection(ConString))
+            try
             {
-                string query = "Select * from tbl_Model";
-
-                using (cmd = new SqlCommand(query, conn))
+                using (conn = new SqlConnection(ConString))
                 {
-                    conn.Open();
-                    data.Load(cmd.ExecuteReader());
+                    SqlCommand cmd = new SqlCommand("Stp_CustomerBill", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    if (txt_username.Text == "")
+                    {
+                        MessageBox.Show("Please Enter Custome Name");
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@Name", txt_username.Text);
+                    }
+                    if (!string.IsNullOrEmpty(txt_cnic.Text))
+                    {
+                        cmd.Parameters.AddWithValue("@CNIC", txt_cnic.Text);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@CNIC", DBNull.Value);
+                    }
+
+                    // Check if BillDate is provided, otherwise, pass null
+                    if (DateTime.TryParse(txt_date.Text, out DateTime date))
+                    {
+                        cmd.Parameters.AddWithValue("@BillDate", date);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@BillDate", DBNull.Value);
+                    }
+                    SqlDataAdapter ad = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    ad.Fill(dt);
+                    reportViewer1.LocalReport.DataSources.Clear();
+                    ReportDataSource source = new ReportDataSource("DataSet1", dt);
+                    reportViewer1.LocalReport.ReportPath = "CustomerBill.rdlc";
+                    reportViewer1.LocalReport.DataSources.Add(source);
+                    reportViewer1.RefreshReport();
                 }
             }
-
-            cmb_models.DataSource = data;
-            cmb_models.DisplayMember = "ModelName";
-            cmb_models.ValueMember = "ModelID";
-        }
-        
-        Bitmap bitmap;
-
-        private void btn_print_Click(object sender, EventArgs e)
-        {
-            // Initialize the bitmap
-            bitmap = new Bitmap(this.Width, this.Height);
-
-            // Draw the form onto the bitmap
-            this.DrawToBitmap(bitmap, new Rectangle(0, 0, this.Width, this.Height));
-
-            // Exclude the print button
-            using (Graphics g = Graphics.FromImage(bitmap))
+            catch (Exception ex)
             {
-                g.FillRectangle(new SolidBrush(this.BackColor), btn_print.Bounds);
+                MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            // Set up the print document
-            printDocument1.DefaultPageSettings.Landscape = true;
-            printDocument1.PrintPage += (s, ev) =>
-            {
-                if (bitmap != null)
-                {
-                    ev.Graphics.DrawImage(bitmap, 0, 0);
-                }
-            };
-
-            // Show the print preview dialog
-            printPreviewDialog1.Document = printDocument1;
-            printPreviewDialog1.ShowDialog();
-
         }
-
     }
 }

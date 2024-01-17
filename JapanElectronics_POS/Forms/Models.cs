@@ -8,10 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Telerik.WinControls.UI;
 
 namespace JapanElectronics_POS.Forms
 {
-    public partial class Models : Form
+    public partial class Models : RadForm
     {
         SqlConnection conn = null;
         SqlCommand cmd = null;
@@ -20,7 +21,6 @@ namespace JapanElectronics_POS.Forms
         {
             InitializeComponent();
             InitializeForm();
-            dgv_models.AutoGenerateColumns = false;
         }
         private void Models_Load(object sender, EventArgs e)
         {
@@ -85,10 +85,10 @@ namespace JapanElectronics_POS.Forms
 
                 using (cmd = new SqlCommand(query, conn))
                 {
-                    int s = (int)cmb_company.SelectedValue;
+                    int s = Convert.ToInt32(cmb_company.SelectedValue);
                     cmd.Parameters.AddWithValue("@selectedValue",s);
                     conn.Open();
-                    data.Load(cmd.ExecuteReader());
+                    data.Load(cmd.ExecuteReader());                  
                 }
             }
 
@@ -96,10 +96,7 @@ namespace JapanElectronics_POS.Forms
             cmb_category.DisplayMember = "CategoryName";
             cmb_category.ValueMember = "CategoryID";
         }
-        private void cmb_company_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Fill_Categories();
-        }
+        
         public void GetAllModels()
         {
             dgv_models.Rows.Clear();
@@ -117,10 +114,7 @@ namespace JapanElectronics_POS.Forms
                     // Assuming you have a DataGridView column named "CompanyName"
                     while (reader.Read())
                     {
-                        int rowIndex = dgv_models.Rows.Add();
-                        dgv_models.Rows[rowIndex].Cells["ModelName"].Value = reader["ModelName"];
-                        dgv_models.Rows[rowIndex].Cells["CategoryName"].Value = reader["CategoryName"];
-                        dgv_models.Rows[rowIndex].Cells["CompanyName"].Value = reader["CompanyName"];
+                        dgv_models.Rows.Add(reader["CompanyName"], reader["CategoryName"], reader["ModelName"]);
                     }
                 }
             }
@@ -149,9 +143,8 @@ namespace JapanElectronics_POS.Forms
                 {
                     using (conn = new SqlConnection(ConString))
                     {
-                        string query = "Insert into tbl_Model(ModelName,Category_ID,Company_ID) " +
-                                        "Values(@ModelName,@Category_ID,@Company_ID)";
-                        using (cmd = new SqlCommand(query, conn))
+                        string query = "Insert into tbl_Model (ModelName,Category_ID,Company_ID)  Values (@ModelName, @Category_ID, @Company_ID ) ";
+                        using (cmd = new SqlCommand(query, conn)) 
                         {
                             conn.Open();
                             cmd.Parameters.AddWithValue("@ModelName", txt_model.Text);
@@ -162,9 +155,7 @@ namespace JapanElectronics_POS.Forms
                         }
                     }
                     txt_model.Text = "";
-                    //   GetAllCompanies();
                     GetAllModels();
-                    Fill_Categories();
                     Fill_Companies();
                 }
             }
@@ -172,8 +163,15 @@ namespace JapanElectronics_POS.Forms
             {
                 throw;
             }
+            finally
+            {
+                conn.Close();
+            }
         }
 
-     
+        private void cmb_company_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        {
+            Fill_Categories();
+        }
     }
 }

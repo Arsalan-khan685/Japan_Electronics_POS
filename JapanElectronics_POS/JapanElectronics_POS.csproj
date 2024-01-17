@@ -35,8 +35,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1576.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1576.0\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1576.0\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1576.0\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1576.0\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.SqlServer.Assessment, Version=1.100.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.150.18208.0\lib\net45\Microsoft.SqlServer.Assessment.dll</HintPath>
     </Reference>
@@ -124,8 +137,8 @@
     <Reference Include="Microsoft.SqlServer.SString, Version=15.100.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.150.18208.0\lib\net45\Microsoft.SqlServer.SString.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.SqlServer.Types, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.150.18208.0\lib\net45\Microsoft.SqlServer.Types.dll</HintPath>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.WmiEnum, Version=15.100.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.150.18208.0\lib\net45\Microsoft.SqlServer.WmiEnum.dll</HintPath>
@@ -264,6 +277,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Datasets\Stocks.cs">
+      <DependentUpon>Stocks.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Datasets\Stocks.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -275,11 +291,11 @@
     <Compile Include="Forms\AddQuantity.Designer.cs">
       <DependentUpon>AddQuantity.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Bill.cs">
+    <Compile Include="Forms\CustomerBill.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Bill.Designer.cs">
-      <DependentUpon>Bill.cs</DependentUpon>
+    <Compile Include="Forms\CustomerBill.Designer.cs">
+      <DependentUpon>CustomerBill.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\DB_Backup.cs">
       <SubType>Form</SubType>
@@ -298,12 +314,6 @@
     </Compile>
     <Compile Include="Forms\Company.Designer.cs">
       <DependentUpon>Company.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\CustomerBill.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\CustomerBill.Designer.cs">
-      <DependentUpon>CustomerBill.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Dashboard.cs">
       <SubType>Form</SubType>
@@ -335,20 +345,22 @@
     <Compile Include="Forms\rpt_Stocks.Designer.cs">
       <DependentUpon>rpt_Stocks.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SalesForm.cs">
+    <Compile Include="Forms\Sales_form.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SalesForm.Designer.cs">
-      <DependentUpon>SalesForm.cs</DependentUpon>
+    <Compile Include="Forms\Sales_form.Designer.cs">
+      <DependentUpon>Sales_form.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="Utility\Utility.cs" />
+    <EmbeddedResource Include="bin\Debug\CustomerBill.rdlc" />
     <EmbeddedResource Include="Forms\AddQuantity.resx">
       <DependentUpon>AddQuantity.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Bill.resx">
-      <DependentUpon>Bill.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\CustomerBill.resx">
+      <DependentUpon>CustomerBill.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DB_Backup.resx">
       <DependentUpon>DB_Backup.cs</DependentUpon>
@@ -358,9 +370,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Company.resx">
       <DependentUpon>Company.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CustomerBill.resx">
-      <DependentUpon>CustomerBill.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
@@ -377,8 +386,8 @@
     <EmbeddedResource Include="Forms\rpt_Stocks.resx">
       <DependentUpon>rpt_Stocks.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SalesForm.resx">
-      <DependentUpon>SalesForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Sales_form.resx">
+      <DependentUpon>Sales_form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -389,7 +398,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="bin\Debug\StocksReport.rdlc" />
+    <EmbeddedResource Include="bin\Debug\StockReport.rdlc" />
     <None Include="Datasets\Stocks.xsc">
       <DependentUpon>Stocks.xsd</DependentUpon>
     </None>
@@ -416,7 +425,22 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Reports\" />
+    <Folder Include="NewFolder1\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.SqlServer.SqlManagementObjects.150.18208.0\build\net45\Microsoft.SqlServer.SqlManagementObjects.targets" Condition="Exists('..\packages\Microsoft.SqlServer.SqlManagementObjects.150.18208.0\build\net45\Microsoft.SqlServer.SqlManagementObjects.targets')" />

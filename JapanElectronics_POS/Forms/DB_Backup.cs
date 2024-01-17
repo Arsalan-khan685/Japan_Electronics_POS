@@ -9,10 +9,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Telerik.WinControls.UI;
 
 namespace JapanElectronics_POS.Forms
 {
-    public partial class DB_Backup : Form
+    public partial class DB_Backup : RadForm
     {
       //  Backup Action;
         public DB_Backup()

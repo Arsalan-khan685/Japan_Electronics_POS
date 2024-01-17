@@ -8,10 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Telerik.WinControls.UI;
 
 namespace JapanElectronics_POS.Forms
 {
-    public partial class Category : Form
+    public partial class Category : RadForm
     {
         SqlConnection conn = null;
         SqlCommand cmd = null;
@@ -19,16 +20,15 @@ namespace JapanElectronics_POS.Forms
         public Category()
         {
             InitializeComponent();
-            dgv_category.AutoGenerateColumns = false;
-         
-            
+
+            // dgv_category.AutoGenerateColumns = false;
             // For Suggestion and Appending of Dropdown
             // Assuming cmb_company is the name of your ComboBox control
-            //cmb_company.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //cmb_company.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            //cmb_company.TextChanged += cmb_company_TextChanged;
+            // cmb_company.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            // cmb_company.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            // cmb_company.TextChanged += cmb_company_TextChanged;
             // Initialize AutoCompleteCustomSource
-            //InitializeAutoComplete();
+            // InitializeAutoComplete();
         }
 
         //  For Suggestion and Appending of Dropdown
@@ -114,13 +114,56 @@ namespace JapanElectronics_POS.Forms
                     // Assuming you have a DataGridView column named "CompanyName"
                     while (reader.Read())
                     {
-                        int rowIndex = dgv_category.Rows.Add();
-                        dgv_category.Rows[rowIndex].Cells["CategoryName"].Value = reader["CategoryName"];
-                        dgv_category.Rows[rowIndex].Cells["CompanyName"].Value = reader["CompanyName"];
+                        dgv_category.Rows.Add(reader["CompanyName"], reader["CategoryName"]);
                     }
                 }
             }
         }
+
+        //private void btn_Save_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (txt_category.Text == "")
+        //        {
+        //            MessageBox.Show("Enter Category Name");
+        //        }
+        //        else if (cmb_company.SelectedValue != null && (int)cmb_company.SelectedValue == -1)
+        //        {
+        //            MessageBox.Show("Please select a company.");
+        //        }
+        //        else
+        //        {
+        //            using (conn = new SqlConnection(ConString))
+        //            {
+        //                string query = "Insert into tbl_Category(CategoryName,Company_ID) Values(@CatName,@Company_ID)";
+        //                using (cmd = new SqlCommand(query, conn))
+        //                {
+        //                    conn.Open();
+        //                    cmd.Parameters.AddWithValue("@CatName", txt_category.Text);
+        //                    cmd.Parameters.AddWithValue("@Company_ID", cmb_company.SelectedValue);
+
+        //                    cmd.ExecuteNonQuery();
+        //                }
+        //            }
+        //            txt_category.Text = "";
+        //            cmb_company.SelectedIndex = -1;
+        //            GetAllCategories();
+        //            FillCompanies();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw;
+        //    }           
+        //}
+        private void btn_back_Click(object sender, EventArgs e)
+        {
+            this.Close();
+         //   Dashboard dashboard = new Dashboard();
+         //   dashboard.Show();
+        }
+
         private void btn_Save_Click(object sender, EventArgs e)
         {
             try
@@ -137,34 +180,29 @@ namespace JapanElectronics_POS.Forms
                 {
                     using (conn = new SqlConnection(ConString))
                     {
-                        string query = "Insert into tbl_Category(CategoryName,Company_ID) Values(@CatName,@Company_ID)";
-                        using (cmd = new SqlCommand(query, conn))
-                        {
-                            conn.Open();
-                            cmd.Parameters.AddWithValue("@CatName", txt_category.Text);
-                            cmd.Parameters.AddWithValue("@Company_ID", cmb_company.SelectedValue);
+                        string q = "Insert into tbl_Category(Company_ID,CategoryName) VALUES (@CompanyID,@Category)";
+                        cmd = new SqlCommand(q, conn);
+                        cmd.Parameters.AddWithValue("@CompanyID", cmb_company.SelectedValue);
+                        cmd.Parameters.AddWithValue("@Category", txt_category.Text);
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
 
-                            cmd.ExecuteNonQuery();
-                        }
+                        txt_category.Text = "";
+                        cmb_company.SelectedIndex = -1;
+                        GetAllCategories();
+                        FillCompanies();
                     }
-                    txt_category.Text = "";
-                    cmb_company.SelectedIndex = -1;
-                    GetAllCategories();
-                    FillCompanies();
                 }
             }
             catch (Exception ex)
             {
-                throw;
-            }           
+                MessageBox.Show(ex.Message);
+              //  throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
-        private void btn_back_Click(object sender, EventArgs e)
-        {
-            this.Close();
-         //   Dashboard dashboard = new Dashboard();
-         //   dashboard.Show();
-        }
-
-        
     }
 }

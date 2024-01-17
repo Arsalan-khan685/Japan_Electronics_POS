@@ -2,10 +2,11 @@
 using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using Telerik.WinControls.UI;
 
 namespace JapanElectronics_POS
 {
-    public partial class Login : Form
+    public partial class Login : RadForm
     {
         public string ConString = Utility.Utility.GetConnectionString();
         public Login()
@@ -51,10 +52,9 @@ namespace JapanElectronics_POS
             }
             else
             {
-                MessageBox.Show("Enter User name and password");
+                 MessageBox.Show("Enter User name and password");
             }
         }
 
-        
     }
 }

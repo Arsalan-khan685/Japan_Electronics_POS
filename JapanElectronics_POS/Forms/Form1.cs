@@ -7,28 +7,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Telerik.WinControls.UI;
 
 namespace JapanElectronics_POS.Forms
 {
-    public partial class Form1 : Form
+    public partial class Form1 : RadForm
     {
         Dashboard dashboard;
         Category category;
         Company company;
         Models models;
         AddQuantity addQuantity;
-    //    SalesForm salesForm;
         rpt_Stocks stocks;
-    //    CustomerBill customerBill;
         DB_Backup backup;
-        Bill bill;
+        CustomerBill bill;
+        Sales_form sales;
         public Form1()
         {
             InitializeComponent();
         }    
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
         }
         private void btn_dashboard_Click(object sender, EventArgs e)
         {
@@ -49,6 +49,7 @@ namespace JapanElectronics_POS.Forms
 
             // Change color for the clicked button
             btn_dashboard.BackColor = Color.Green;
+            
         }
         private void Dashboard_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -147,29 +148,6 @@ namespace JapanElectronics_POS.Forms
             addQuantity = null;
         }
 
-        //private void btn_sales_form_Click(object sender, EventArgs e)
-        //{
-        //    if (salesForm == null)
-        //    {
-        //        salesForm = new SalesForm();
-        //        salesForm.FormClosed += SalesForm_FormClosed; 
-        //        salesForm.MdiParent = this;
-        //        salesForm.Dock = DockStyle.Fill;
-        //        salesForm.Show();
-        //    }
-        //    else
-        //    {
-        //        salesForm.Activate();
-        //    }
-        //    ResetButtonColors();
-
-        //    // Change color for the clicked button
-        //    btn_sales_form.BackColor = Color.Green;
-        //}
-        //private void SalesForm_FormClosed(object sender, FormClosedEventArgs e)
-        //{
-        //    salesForm = null;
-        //}
         private void ResetButtonColors()
         {
             // Reset color for all buttons
@@ -178,11 +156,10 @@ namespace JapanElectronics_POS.Forms
             btn_categories.BackColor = Color.FromArgb(23, 24, 29); 
             btn_models.BackColor = Color.FromArgb(23, 24, 29); 
             btn_add_qty.BackColor = Color.FromArgb(23, 24, 29); 
-       //     btn_sales_form.BackColor = Color.FromArgb(23, 24, 29); 
             btn_stock_report.BackColor = Color.FromArgb(23, 24, 29);
-        //    btn_bill.BackColor = Color.FromArgb(23, 24, 29);
             btn_backup.BackColor = Color.FromArgb(23, 24, 29);
-            btn_c_bill.BackColor = Color.FromArgb(23,24,29);
+            btn_customer_bill.BackColor = Color.FromArgb(23, 24, 29);
+            btn_sales.BackColor = Color.FromArgb(23, 24, 29);
         }
 
         private void btn_stock_report_Click(object sender, EventArgs e)
@@ -210,30 +187,6 @@ namespace JapanElectronics_POS.Forms
             stocks = null;
         }
 
-        //private void btn_bill_Click(object sender, EventArgs e)
-        //{
-        //    if(customerBill == null)
-        //    {
-        //        customerBill = new CustomerBill();
-        //        customerBill.FormClosed += CustomerBill_FormClosed;
-        //        customerBill.MdiParent = this;
-        //        customerBill.Dock = DockStyle.Fill;
-        //        customerBill.Show();
-        //    }
-        //    else
-        //    {
-        //        customerBill.Activate();
-        //    }
-        //    ResetButtonColors();
-
-        //    // Change color for the clicked button
-        //    btn_bill.BackColor = Color.Green;
-        //}
-        //private void CustomerBill_FormClosed(object sender, FormClosedEventArgs e)
-        //{
-        //    customerBill = null;
-        //}
-
         private void btn_backup_Click(object sender, EventArgs e)
         {
             if (backup == null)
@@ -254,18 +207,16 @@ namespace JapanElectronics_POS.Forms
             btn_backup.BackColor = Color.Green;
         }
 
-      
-
         private void Backup_FormClosed(object sender, FormClosedEventArgs e)
         {
             backup = null;
         }
 
-        private void btn_c_bill_Click(object sender, EventArgs e)
+        private void btn_customer_bill_Click(object sender, EventArgs e)
         {
             if (bill == null)
             {
-                bill = new Bill();
+                bill = new CustomerBill();
                 bill.FormClosed += Bill_FormClosed;
                 bill.MdiParent = this;
                 bill.Dock = DockStyle.Fill;
@@ -278,7 +229,7 @@ namespace JapanElectronics_POS.Forms
             ResetButtonColors();
 
             // Change color for the clicked button
-            btn_c_bill.BackColor = Color.Green;
+            btn_customer_bill.BackColor = Color.Green;
         }
 
         private void Bill_FormClosed(object sender, FormClosedEventArgs e)
@@ -286,5 +237,29 @@ namespace JapanElectronics_POS.Forms
             bill = null;
         }
 
+        private void btn_sales_Click(object sender, EventArgs e)
+        {
+            if (sales == null)
+            {
+                sales = new Sales_form();
+                sales.FormClosed += Sales_FormClosed;
+                sales.MdiParent = this;
+                sales.Dock = DockStyle.Fill;
+                sales.Show();
+            }
+            else
+            {
+                sales.Activate();
+            }
+            ResetButtonColors();
+
+            // Change color for the clicked button
+            btn_sales.BackColor = Color.Green;
+        }
+
+        private void Sales_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            sales = null;
+        }
     }
 }

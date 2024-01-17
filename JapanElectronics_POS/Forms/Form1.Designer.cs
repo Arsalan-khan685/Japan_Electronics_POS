@@ -39,12 +39,14 @@ namespace JapanElectronics_POS.Forms
             this.btn_categories = new System.Windows.Forms.Button();
             this.btn_models = new System.Windows.Forms.Button();
             this.btn_add_qty = new System.Windows.Forms.Button();
+            this.btn_sales = new System.Windows.Forms.Button();
+            this.btn_customer_bill = new System.Windows.Forms.Button();
             this.btn_stock_report = new System.Windows.Forms.Button();
-            this.btn_c_bill = new System.Windows.Forms.Button();
             this.btn_backup = new System.Windows.Forms.Button();
             this.sidebarTransition = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.pnl_sidebar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -54,8 +56,9 @@ namespace JapanElectronics_POS.Forms
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1206, 81);
+            this.panel1.Size = new System.Drawing.Size(1062, 53);
             this.panel1.TabIndex = 0;
             // 
             // nightControlBox1
@@ -73,7 +76,7 @@ namespace JapanElectronics_POS.Forms
             this.nightControlBox1.EnableMaximizeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(160)))));
             this.nightControlBox1.EnableMinimizeButton = true;
             this.nightControlBox1.EnableMinimizeColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(160)))));
-            this.nightControlBox1.Location = new System.Drawing.Point(1067, 0);
+            this.nightControlBox1.Location = new System.Drawing.Point(923, 0);
             this.nightControlBox1.MaximizeHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.nightControlBox1.MaximizeHoverForeColor = System.Drawing.Color.White;
             this.nightControlBox1.MinimizeHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -84,14 +87,15 @@ namespace JapanElectronics_POS.Forms
             // 
             // label1
             // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Location = new System.Drawing.Point(404, 10);
+            this.label1.Margin = new System.Windows.Forms.Padding(2);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1206, 81);
+            this.label1.Size = new System.Drawing.Size(237, 37);
             this.label1.TabIndex = 1;
             this.label1.Text = "Japan Electronics";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnl_sidebar
             // 
@@ -101,13 +105,15 @@ namespace JapanElectronics_POS.Forms
             this.pnl_sidebar.Controls.Add(this.btn_categories);
             this.pnl_sidebar.Controls.Add(this.btn_models);
             this.pnl_sidebar.Controls.Add(this.btn_add_qty);
+            this.pnl_sidebar.Controls.Add(this.btn_sales);
+            this.pnl_sidebar.Controls.Add(this.btn_customer_bill);
             this.pnl_sidebar.Controls.Add(this.btn_stock_report);
-            this.pnl_sidebar.Controls.Add(this.btn_c_bill);
             this.pnl_sidebar.Controls.Add(this.btn_backup);
             this.pnl_sidebar.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnl_sidebar.Location = new System.Drawing.Point(0, 81);
+            this.pnl_sidebar.Location = new System.Drawing.Point(0, 53);
+            this.pnl_sidebar.Margin = new System.Windows.Forms.Padding(2);
             this.pnl_sidebar.Name = "pnl_sidebar";
-            this.pnl_sidebar.Size = new System.Drawing.Size(312, 835);
+            this.pnl_sidebar.Size = new System.Drawing.Size(232, 758);
             this.pnl_sidebar.TabIndex = 1;
             // 
             // btn_dashboard
@@ -120,7 +126,7 @@ namespace JapanElectronics_POS.Forms
             this.btn_dashboard.Location = new System.Drawing.Point(0, 0);
             this.btn_dashboard.Margin = new System.Windows.Forms.Padding(0);
             this.btn_dashboard.Name = "btn_dashboard";
-            this.btn_dashboard.Size = new System.Drawing.Size(312, 83);
+            this.btn_dashboard.Size = new System.Drawing.Size(232, 54);
             this.btn_dashboard.TabIndex = 2;
             this.btn_dashboard.Text = "Dashboard";
             this.btn_dashboard.UseVisualStyleBackColor = false;
@@ -133,10 +139,10 @@ namespace JapanElectronics_POS.Forms
             this.btn_companies.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_companies.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_companies.ForeColor = System.Drawing.Color.White;
-            this.btn_companies.Location = new System.Drawing.Point(0, 83);
+            this.btn_companies.Location = new System.Drawing.Point(0, 54);
             this.btn_companies.Margin = new System.Windows.Forms.Padding(0);
             this.btn_companies.Name = "btn_companies";
-            this.btn_companies.Size = new System.Drawing.Size(312, 83);
+            this.btn_companies.Size = new System.Drawing.Size(232, 54);
             this.btn_companies.TabIndex = 3;
             this.btn_companies.Text = "Companies";
             this.btn_companies.UseVisualStyleBackColor = false;
@@ -149,10 +155,10 @@ namespace JapanElectronics_POS.Forms
             this.btn_categories.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_categories.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_categories.ForeColor = System.Drawing.Color.White;
-            this.btn_categories.Location = new System.Drawing.Point(0, 166);
+            this.btn_categories.Location = new System.Drawing.Point(0, 108);
             this.btn_categories.Margin = new System.Windows.Forms.Padding(0);
             this.btn_categories.Name = "btn_categories";
-            this.btn_categories.Size = new System.Drawing.Size(312, 83);
+            this.btn_categories.Size = new System.Drawing.Size(232, 54);
             this.btn_categories.TabIndex = 2;
             this.btn_categories.Text = "Categories";
             this.btn_categories.UseVisualStyleBackColor = false;
@@ -165,10 +171,10 @@ namespace JapanElectronics_POS.Forms
             this.btn_models.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_models.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_models.ForeColor = System.Drawing.Color.White;
-            this.btn_models.Location = new System.Drawing.Point(0, 249);
+            this.btn_models.Location = new System.Drawing.Point(0, 162);
             this.btn_models.Margin = new System.Windows.Forms.Padding(0);
             this.btn_models.Name = "btn_models";
-            this.btn_models.Size = new System.Drawing.Size(312, 83);
+            this.btn_models.Size = new System.Drawing.Size(232, 54);
             this.btn_models.TabIndex = 5;
             this.btn_models.Text = "Models";
             this.btn_models.UseVisualStyleBackColor = false;
@@ -181,14 +187,46 @@ namespace JapanElectronics_POS.Forms
             this.btn_add_qty.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_add_qty.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_add_qty.ForeColor = System.Drawing.Color.White;
-            this.btn_add_qty.Location = new System.Drawing.Point(0, 332);
+            this.btn_add_qty.Location = new System.Drawing.Point(0, 216);
             this.btn_add_qty.Margin = new System.Windows.Forms.Padding(0);
             this.btn_add_qty.Name = "btn_add_qty";
-            this.btn_add_qty.Size = new System.Drawing.Size(312, 83);
+            this.btn_add_qty.Size = new System.Drawing.Size(232, 54);
             this.btn_add_qty.TabIndex = 5;
             this.btn_add_qty.Text = "Add Stock";
             this.btn_add_qty.UseVisualStyleBackColor = false;
             this.btn_add_qty.Click += new System.EventHandler(this.btn_add_qty_Click);
+            // 
+            // btn_sales
+            // 
+            this.btn_sales.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(24)))), ((int)(((byte)(29)))));
+            this.btn_sales.FlatAppearance.BorderSize = 0;
+            this.btn_sales.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_sales.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_sales.ForeColor = System.Drawing.Color.White;
+            this.btn_sales.Location = new System.Drawing.Point(0, 270);
+            this.btn_sales.Margin = new System.Windows.Forms.Padding(0);
+            this.btn_sales.Name = "btn_sales";
+            this.btn_sales.Size = new System.Drawing.Size(232, 45);
+            this.btn_sales.TabIndex = 11;
+            this.btn_sales.Text = "Sales";
+            this.btn_sales.UseVisualStyleBackColor = false;
+            this.btn_sales.Click += new System.EventHandler(this.btn_sales_Click);
+            // 
+            // btn_customer_bill
+            // 
+            this.btn_customer_bill.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(24)))), ((int)(((byte)(29)))));
+            this.btn_customer_bill.FlatAppearance.BorderSize = 0;
+            this.btn_customer_bill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_customer_bill.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_customer_bill.ForeColor = System.Drawing.Color.White;
+            this.btn_customer_bill.Location = new System.Drawing.Point(0, 315);
+            this.btn_customer_bill.Margin = new System.Windows.Forms.Padding(0);
+            this.btn_customer_bill.Name = "btn_customer_bill";
+            this.btn_customer_bill.Size = new System.Drawing.Size(232, 45);
+            this.btn_customer_bill.TabIndex = 10;
+            this.btn_customer_bill.Text = "Customer Bill";
+            this.btn_customer_bill.UseVisualStyleBackColor = false;
+            this.btn_customer_bill.Click += new System.EventHandler(this.btn_customer_bill_Click);
             // 
             // btn_stock_report
             // 
@@ -197,30 +235,14 @@ namespace JapanElectronics_POS.Forms
             this.btn_stock_report.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_stock_report.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_stock_report.ForeColor = System.Drawing.Color.White;
-            this.btn_stock_report.Location = new System.Drawing.Point(0, 415);
+            this.btn_stock_report.Location = new System.Drawing.Point(0, 360);
             this.btn_stock_report.Margin = new System.Windows.Forms.Padding(0);
             this.btn_stock_report.Name = "btn_stock_report";
-            this.btn_stock_report.Size = new System.Drawing.Size(312, 83);
+            this.btn_stock_report.Size = new System.Drawing.Size(232, 54);
             this.btn_stock_report.TabIndex = 7;
             this.btn_stock_report.Text = "Stock Report";
             this.btn_stock_report.UseVisualStyleBackColor = false;
             this.btn_stock_report.Click += new System.EventHandler(this.btn_stock_report_Click);
-            // 
-            // btn_c_bill
-            // 
-            this.btn_c_bill.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(24)))), ((int)(((byte)(29)))));
-            this.btn_c_bill.FlatAppearance.BorderSize = 0;
-            this.btn_c_bill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_c_bill.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_c_bill.ForeColor = System.Drawing.Color.White;
-            this.btn_c_bill.Location = new System.Drawing.Point(0, 498);
-            this.btn_c_bill.Margin = new System.Windows.Forms.Padding(0);
-            this.btn_c_bill.Name = "btn_c_bill";
-            this.btn_c_bill.Size = new System.Drawing.Size(312, 69);
-            this.btn_c_bill.TabIndex = 10;
-            this.btn_c_bill.Text = "Bill";
-            this.btn_c_bill.UseVisualStyleBackColor = false;
-            this.btn_c_bill.Click += new System.EventHandler(this.btn_c_bill_Click);
             // 
             // btn_backup
             // 
@@ -229,10 +251,10 @@ namespace JapanElectronics_POS.Forms
             this.btn_backup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_backup.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_backup.ForeColor = System.Drawing.Color.White;
-            this.btn_backup.Location = new System.Drawing.Point(0, 567);
+            this.btn_backup.Location = new System.Drawing.Point(0, 414);
             this.btn_backup.Margin = new System.Windows.Forms.Padding(0);
             this.btn_backup.Name = "btn_backup";
-            this.btn_backup.Size = new System.Drawing.Size(312, 83);
+            this.btn_backup.Size = new System.Drawing.Size(232, 54);
             this.btn_backup.TabIndex = 9;
             this.btn_backup.Text = "Backup";
             this.btn_backup.UseVisualStyleBackColor = false;
@@ -244,19 +266,29 @@ namespace JapanElectronics_POS.Forms
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1206, 916);
+            this.ClientSize = new System.Drawing.Size(1062, 811);
+            this.ControlBox = false;
             this.Controls.Add(this.pnl_sidebar);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.IsMdiContainer = true;
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
+            // 
+            // 
+            // 
+            this.RootElement.ApplyShapeToControl = true;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.TopMost = true;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.pnl_sidebar.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -275,6 +307,7 @@ namespace JapanElectronics_POS.Forms
         private System.Windows.Forms.Button btn_add_qty;
         private System.Windows.Forms.Button btn_stock_report;
         private System.Windows.Forms.Button btn_backup;
-        private System.Windows.Forms.Button btn_c_bill;
+        private System.Windows.Forms.Button btn_customer_bill;
+        private System.Windows.Forms.Button btn_sales;
     }
 }

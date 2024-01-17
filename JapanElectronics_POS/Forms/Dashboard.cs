@@ -18,16 +18,15 @@ namespace JapanElectronics_POS.Forms
         string ConString = Utility.Utility.GetConnectionString();
         public Dashboard()
         {
+            AutoScaleMode = AutoScaleMode.None;
             InitializeComponent();
-         //   Models();
+        //    this.ControlBox = false;
+            //   Models();
         }
 
    
         private void Dashboard_Load(object sender, EventArgs e)
         {
-            this.ControlBox = false;
-            pnl_cat.Visible = false;
-            pnl_model.Visible = false;
 
             btn_haier.Click += Company_Click;
             btn_dawlance.Click += Company_Click;
@@ -46,8 +45,6 @@ namespace JapanElectronics_POS.Forms
         private void LoadDataIntoPanel(string category)
         {
             int CatId = 0;
-            // Clear existing controls in pnl_cat
-            pnl_cat.Controls.Clear();
             if (category == "Haier")
             {
                 CatId = 1;
@@ -80,30 +77,12 @@ namespace JapanElectronics_POS.Forms
                         categoryButton.Text = row["CategoryName"].ToString(); // Replace "ColumnName" with your actual column name
                         categoryButton.Width = 150;
                         categoryButton.Height = 30;
-                        //     categoryButton.Click += ModelButton_Click; // Attach event handler for model buttons
-                        pnl_cat.Controls.Add(categoryButton);
                     }
                 }
             }
 
-            // Show pnl_cat and hide other panels if needed
-            pnl_cat.Visible = true;
-            pnl_model.Visible = false;
         }
 
-        //private void ModelButton_Click(object sender, EventArgs e)
-        //{
-        //    Button clickedButton = (Button)sender;
-
-        //    // Implement the logic to handle model button click
-        //    // You can load and display data for the selected model in pnl_model
-        //    // Example: LoadDataIntoModelPanel(clickedButton.Text);
-        //}
     }
 }
 
-        //private void btn_haier_Click(object sender, EventArgs e)
-        //{
-        //    pnl_cat.Visible = true;
-        //}
-   // }

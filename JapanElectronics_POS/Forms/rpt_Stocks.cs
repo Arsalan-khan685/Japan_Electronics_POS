@@ -9,10 +9,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Telerik.WinControls.UI;
 
 namespace JapanElectronics_POS.Forms
 {
-    public partial class rpt_Stocks : Form
+    public partial class rpt_Stocks : RadForm
     {
         SqlConnection conn = null;
         SqlCommand cmd = null;
@@ -76,63 +77,26 @@ namespace JapanElectronics_POS.Forms
             {
                 using(conn = new SqlConnection(ConString))
                 {
-                    //string query = "select c.CategoryName,co.CompanyName,m.ModelName,s.TotalQuantity " +
-                    //                " from tbl_Stock s " +
-                    //                " inner join tbl_Company co on s.Company_ID = co.CompanyID" +
-                    //                " inner join tbl_Category c on s.category_ID = c.CategoryID " +
-                    //                "inner join tbl_Model m on s.Model_ID = m.ModelID";
-                                    
                     SqlCommand cmd = new SqlCommand("Stp_rptStocks", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@Company_ID", cmb_company.SelectedValue.ToString() != "-1" ? (object)cmb_company.SelectedValue : DBNull.Value);
                     cmd.Parameters.AddWithValue("@Category_ID", cmb_category.SelectedValue.ToString() != "-1" ? (object)cmb_category.SelectedValue : DBNull.Value);
                     cmd.Parameters.AddWithValue("@Model_ID", cmb_model.SelectedValue.ToString() != "-1" ? (object)cmb_model.SelectedValue : DBNull.Value);
 
-                    //if (cmb_company.SelectedValue.ToString() != "-1")
-                    //{
-                    //    cmd.Parameters.AddWithValue("@Company_ID",cmb_company.SelectedValue);
-                    //}
-                    //else
-                    //{
-                    //    cmd.Parameters.AddWithValue("@Company_ID",null);
-                    //}
-                    //if (cmb_category.SelectedValue.ToString() != "-1")
-                    //{
-                    //    cmd.Parameters.AddWithValue("@Category_ID", cmb_category.SelectedValue);
-                    //}
-                    //else
-                    //{
-                    //    cmd.Parameters.AddWithValue("@Category_ID", null);
-                    //}
-                    //if (cmb_model.SelectedValue.ToString() != "-1")
-                    //{
-                    //    cmd.Parameters.AddWithValue("@Model_ID", cmb_model.SelectedValue);
-                    //}
-                    //else
-                    //{
-                    //    cmd.Parameters.AddWithValue("@Model_ID", null);
-                    //}
-
                     SqlDataAdapter ad = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     ad.Fill(dt);
                     reportViewer1.LocalReport.DataSources.Clear();
                     ReportDataSource source = new ReportDataSource("DataSet1",dt);
-                    reportViewer1.LocalReport.ReportPath = "StocksReport.rdlc";
+                    reportViewer1.LocalReport.ReportPath = "StockReport.rdlc";
                     reportViewer1.LocalReport.DataSources.Add(source);
-                    reportViewer1.RefreshReport();
-
-                    
+                    reportViewer1.RefreshReport();                   
                 }
             }
             catch (Exception ex)
             {
                 throw;
             }
-        }
-        private void cmb_company_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            FillCategories();
         }
         public void FillCategories()
         {
@@ -164,10 +128,6 @@ namespace JapanElectronics_POS.Forms
             cmb_category.DisplayMember = "CategoryName";
             cmb_category.ValueMember = "CategoryID";
         }
-        private void cmb_category_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            FillModels();
-        }
         public void FillModels()
         {
             DataTable data = new DataTable();
@@ -197,6 +157,16 @@ namespace JapanElectronics_POS.Forms
             cmb_model.DataSource = data;
             cmb_model.DisplayMember = "ModelName";
             cmb_model.ValueMember = "ModelID";
+        }
+
+        private void cmb_company_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        {
+            FillCategories();
+        }
+
+        private void cmb_category_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        {
+            FillModels();
         }
     }
 }

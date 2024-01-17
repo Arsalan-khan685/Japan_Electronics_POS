@@ -8,10 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Telerik.WinControls.UI;
 
 namespace JapanElectronics_POS.Forms
 {
-    public partial class AddQuantity : Form
+    public partial class AddQuantity : RadForm
     {
         SqlConnection conn = null;
         SqlCommand cmd = null;
@@ -116,7 +117,7 @@ namespace JapanElectronics_POS.Forms
 
                 using (cmd = new SqlCommand(query, conn))
                 {
-                    int s = (int)cmb_company.SelectedValue;
+                    int s = Convert.ToInt32(cmb_company.SelectedValue);
                     cmd.Parameters.AddWithValue("@selectedValue", s);
                     conn.Open();
                     data.Load(cmd.ExecuteReader());
@@ -127,14 +128,7 @@ namespace JapanElectronics_POS.Forms
             cmb_category.DisplayMember = "CategoryName";
             cmb_category.ValueMember = "CategoryID";
         }
-        private void cmb_company_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Fill_Categories();
-        }
-        private void cmb_category_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Fill_Models();
-        }
+      
         public void Fill_Models()
         {
             DataTable data = new DataTable();
@@ -154,7 +148,7 @@ namespace JapanElectronics_POS.Forms
 
                 using (cmd = new SqlCommand(query, conn))
                 {
-                    int s = (int)cmb_category.SelectedValue;
+                    int s = Convert.ToInt32(cmb_category.SelectedValue);
                     cmd.Parameters.AddWithValue("@selectedValue", s);
                     conn.Open();
                     data.Load(cmd.ExecuteReader());
@@ -193,8 +187,6 @@ namespace JapanElectronics_POS.Forms
                 {
                     using (conn = new SqlConnection(ConString))
                     {
-                    //    string query = "Insert into tbl_Quantity(UnitPrice,Quantity,TotalPrice,Model_ID,Category_ID,Company_ID,CreationDate) " +
-                    //                    "Values(@UnitPrice,@Quantity,@TotalPrice,@Model_ID,@Category_ID,@Company_ID,@CreationDate)";
                         
                         using (cmd = new SqlCommand("Stp_QuantityInsertion", conn))
                         {
@@ -216,6 +208,10 @@ namespace JapanElectronics_POS.Forms
                             }
                             conn.Open();
                             cmd.ExecuteNonQuery();
+                            MessageBox.Show("Quantity Added Succesfully");
+                            txt_unitprice.Text = "";
+                            txt_quantity.Text = "";
+                            txt_totalprice.Text = "";
                             Fill_Categories();
                             Fill_Companies();
                             Fill_Models();
@@ -245,6 +241,16 @@ namespace JapanElectronics_POS.Forms
                 txt_totalprice.Text = txt_unitprice.Text;
             }
         }
-       
+
+        private void cmb_company_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        {
+            Fill_Categories();
+        }
+
+        private void cmb_category_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        {
+            Fill_Models();
+        }
+
     }
 }

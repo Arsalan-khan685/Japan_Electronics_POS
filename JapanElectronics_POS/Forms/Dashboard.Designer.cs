@@ -36,8 +36,6 @@ namespace JapanElectronics_POS.Forms
             this.btn_pel = new System.Windows.Forms.Button();
             this.btn_other = new System.Windows.Forms.Button();
             this.pnl_cmp = new System.Windows.Forms.Panel();
-            this.pnl_cat = new System.Windows.Forms.Panel();
-            this.pnl_model = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.pnl_cmp.SuspendLayout();
             this.SuspendLayout();
@@ -45,9 +43,10 @@ namespace JapanElectronics_POS.Forms
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(161, 55);
+            this.label1.Location = new System.Drawing.Point(121, 45);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(429, 38);
+            this.label1.Size = new System.Drawing.Size(322, 31);
             this.label1.TabIndex = 0;
             this.label1.Text = "Dashobard Of Japan Electronics";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -57,19 +56,19 @@ namespace JapanElectronics_POS.Forms
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1098, 114);
+            this.panel1.Size = new System.Drawing.Size(824, 93);
             this.panel1.TabIndex = 1;
             // 
             // btn_haier
             // 
             this.btn_haier.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.btn_haier.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_haier.Location = new System.Drawing.Point(4, 109);
-            this.btn_haier.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_haier.Location = new System.Drawing.Point(3, 89);
+            this.btn_haier.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_haier.Name = "btn_haier";
-            this.btn_haier.Size = new System.Drawing.Size(261, 75);
+            this.btn_haier.Size = new System.Drawing.Size(196, 61);
             this.btn_haier.TabIndex = 2;
             this.btn_haier.Text = "Haier";
             this.btn_haier.UseVisualStyleBackColor = false;
@@ -78,10 +77,10 @@ namespace JapanElectronics_POS.Forms
             // 
             this.btn_dawlance.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.btn_dawlance.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_dawlance.Location = new System.Drawing.Point(4, 206);
-            this.btn_dawlance.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_dawlance.Location = new System.Drawing.Point(3, 167);
+            this.btn_dawlance.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_dawlance.Name = "btn_dawlance";
-            this.btn_dawlance.Size = new System.Drawing.Size(261, 75);
+            this.btn_dawlance.Size = new System.Drawing.Size(196, 61);
             this.btn_dawlance.TabIndex = 3;
             this.btn_dawlance.Text = "Dawlance";
             this.btn_dawlance.UseVisualStyleBackColor = false;
@@ -90,10 +89,10 @@ namespace JapanElectronics_POS.Forms
             // 
             this.btn_pel.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.btn_pel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_pel.Location = new System.Drawing.Point(4, 296);
-            this.btn_pel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_pel.Location = new System.Drawing.Point(3, 240);
+            this.btn_pel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_pel.Name = "btn_pel";
-            this.btn_pel.Size = new System.Drawing.Size(261, 75);
+            this.btn_pel.Size = new System.Drawing.Size(196, 61);
             this.btn_pel.TabIndex = 4;
             this.btn_pel.Text = "Pel";
             this.btn_pel.UseVisualStyleBackColor = false;
@@ -102,10 +101,10 @@ namespace JapanElectronics_POS.Forms
             // 
             this.btn_other.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.btn_other.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_other.Location = new System.Drawing.Point(3, 391);
-            this.btn_other.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_other.Location = new System.Drawing.Point(2, 318);
+            this.btn_other.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_other.Name = "btn_other";
-            this.btn_other.Size = new System.Drawing.Size(262, 75);
+            this.btn_other.Size = new System.Drawing.Size(196, 61);
             this.btn_other.TabIndex = 5;
             this.btn_other.Text = "Other";
             this.btn_other.UseVisualStyleBackColor = false;
@@ -117,38 +116,22 @@ namespace JapanElectronics_POS.Forms
             this.pnl_cmp.Controls.Add(this.btn_dawlance);
             this.pnl_cmp.Controls.Add(this.btn_pel);
             this.pnl_cmp.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnl_cmp.Location = new System.Drawing.Point(0, 114);
+            this.pnl_cmp.Location = new System.Drawing.Point(0, 93);
+            this.pnl_cmp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnl_cmp.Name = "pnl_cmp";
-            this.pnl_cmp.Size = new System.Drawing.Size(268, 730);
+            this.pnl_cmp.Size = new System.Drawing.Size(201, 593);
             this.pnl_cmp.TabIndex = 6;
-            // 
-            // pnl_cat
-            // 
-            this.pnl_cat.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnl_cat.Location = new System.Drawing.Point(268, 114);
-            this.pnl_cat.Name = "pnl_cat";
-            this.pnl_cat.Size = new System.Drawing.Size(322, 730);
-            this.pnl_cat.TabIndex = 7;
-            // 
-            // pnl_model
-            // 
-            this.pnl_model.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnl_model.Location = new System.Drawing.Point(590, 114);
-            this.pnl_model.Name = "pnl_model";
-            this.pnl_model.Size = new System.Drawing.Size(322, 730);
-            this.pnl_model.TabIndex = 8;
             // 
             // Dashboard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1098, 844);
-            this.Controls.Add(this.pnl_model);
-            this.Controls.Add(this.pnl_cat);
+            this.ClientSize = new System.Drawing.Size(824, 686);
+            this.ControlBox = false;
             this.Controls.Add(this.pnl_cmp);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Dashboard";
             this.Text = "Dashboard";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -168,7 +151,5 @@ namespace JapanElectronics_POS.Forms
         private System.Windows.Forms.Button btn_pel;
         private System.Windows.Forms.Button btn_other;
         private System.Windows.Forms.Panel pnl_cmp;
-        private System.Windows.Forms.Panel pnl_cat;
-        private System.Windows.Forms.Panel pnl_model;
     }
 }

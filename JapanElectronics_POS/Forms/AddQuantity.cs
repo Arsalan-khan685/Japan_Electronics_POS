@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JapanElectronics_POS.Utility;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,6 +26,7 @@ namespace JapanElectronics_POS.Forms
             txt_quantity.KeyPress += Txt_quantity_KeyPress;
             txt_unitprice.KeyPress += Txt_unitprice_KeyPress;
             txt_totalprice.KeyPress += Txt_totalprice_KeyPress;
+            txt_creationdate.Text = DateTime.Now.ToString();
         }
         private void Txt_totalprice_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -80,7 +82,7 @@ namespace JapanElectronics_POS.Forms
             // Create a default row for 'Select' with a value of -1
             DataRow defaultRow = data.NewRow();
             defaultRow["CompanyID"] = -1;
-            defaultRow["CompanyName"] = "Select Company";
+            defaultRow["CompanyName"] = "-- Select Company --";
             data.Rows.Add(defaultRow);
 
             using (conn = new SqlConnection(ConString))
@@ -108,7 +110,7 @@ namespace JapanElectronics_POS.Forms
             // Create a default row for 'Select' with a value of -1
             DataRow defaultRow = data.NewRow();
             defaultRow["CategoryID"] = -1;
-            defaultRow["CategoryName"] = "Select Category";
+            defaultRow["CategoryName"] = "-- Select Category --";
             data.Rows.Add(defaultRow);
 
             using (conn = new SqlConnection(ConString))
@@ -127,8 +129,7 @@ namespace JapanElectronics_POS.Forms
             cmb_category.DataSource = data;
             cmb_category.DisplayMember = "CategoryName";
             cmb_category.ValueMember = "CategoryID";
-        }
-      
+        }     
         public void Fill_Models()
         {
             DataTable data = new DataTable();
@@ -139,7 +140,7 @@ namespace JapanElectronics_POS.Forms
             // Create a default row for 'Select' with a value of -1
             DataRow defaultRow = data.NewRow();
             defaultRow["ModelID"] = -1;
-            defaultRow["ModelName"] = "Select Model";
+            defaultRow["ModelName"] = "-- Select Model --";
             data.Rows.Add(defaultRow);
 
             using (conn = new SqlConnection(ConString))
@@ -187,7 +188,6 @@ namespace JapanElectronics_POS.Forms
                 {
                     using (conn = new SqlConnection(ConString))
                     {
-                        
                         using (cmd = new SqlCommand("Stp_QuantityInsertion", conn))
                         {
                             cmd.CommandType = CommandType.StoredProcedure;
@@ -206,22 +206,21 @@ namespace JapanElectronics_POS.Forms
                                 MessageBox.Show("Invalid Date Format");
                                 return;
                             }
+                            cmd.Parameters.AddWithValue("@AdminId", AppSettings.AdminId);
                             conn.Open();
                             cmd.ExecuteNonQuery();
                             MessageBox.Show("Quantity Added Succesfully");
                             txt_unitprice.Text = "";
                             txt_quantity.Text = "";
-                            txt_totalprice.Text = "";
-                            Fill_Categories();
+                            txt_totalprice.Text = "";                            
                             Fill_Companies();
-                            Fill_Models();
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message);
             }
             finally 
             {
@@ -241,12 +240,10 @@ namespace JapanElectronics_POS.Forms
                 txt_totalprice.Text = txt_unitprice.Text;
             }
         }
-
         private void cmb_company_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
             Fill_Categories();
         }
-
         private void cmb_category_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
             Fill_Models();

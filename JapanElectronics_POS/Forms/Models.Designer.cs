@@ -32,6 +32,7 @@ namespace JapanElectronics_POS.Forms
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn1 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn2 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn3 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn4 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label4 = new Telerik.WinControls.UI.RadLabel();
@@ -80,7 +81,7 @@ namespace JapanElectronics_POS.Forms
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(930, 221);
+            this.panel1.Size = new System.Drawing.Size(954, 221);
             this.panel1.TabIndex = 0;
             // 
             // panel3
@@ -90,7 +91,7 @@ namespace JapanElectronics_POS.Forms
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(930, 86);
+            this.panel3.Size = new System.Drawing.Size(954, 86);
             this.panel3.TabIndex = 12;
             // 
             // label4
@@ -98,7 +99,7 @@ namespace JapanElectronics_POS.Forms
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(434, 43);
+            this.label4.Location = new System.Drawing.Point(446, 43);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(84, 33);
@@ -111,12 +112,12 @@ namespace JapanElectronics_POS.Forms
             this.btn_back.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_back.BackColor = System.Drawing.Color.DodgerBlue;
             this.btn_back.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btn_back.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_back.Location = new System.Drawing.Point(591, 149);
+            this.btn_back.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_back.Location = new System.Drawing.Point(650, 159);
             this.btn_back.Margin = new System.Windows.Forms.Padding(2);
             this.btn_back.Name = "btn_back";
-            this.btn_back.Size = new System.Drawing.Size(71, 29);
-            this.btn_back.TabIndex = 11;
+            this.btn_back.Size = new System.Drawing.Size(79, 36);
+            this.btn_back.TabIndex = 4;
             this.btn_back.Text = "back";
             this.btn_back.Click += new System.EventHandler(this.btn_back_Click);
             // 
@@ -124,77 +125,77 @@ namespace JapanElectronics_POS.Forms
             // 
             this.btn_Save.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_Save.BackColor = System.Drawing.Color.DodgerBlue;
-            this.btn_Save.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Save.Location = new System.Drawing.Point(666, 149);
+            this.btn_Save.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Save.Location = new System.Drawing.Point(748, 159);
             this.btn_Save.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Save.Name = "btn_Save";
-            this.btn_Save.Size = new System.Drawing.Size(69, 29);
-            this.btn_Save.TabIndex = 10;
+            this.btn_Save.Size = new System.Drawing.Size(80, 36);
+            this.btn_Save.TabIndex = 5;
             this.btn_Save.Text = "Save";
             this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
             // 
             // txt_model
             // 
             this.txt_model.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txt_model.Location = new System.Drawing.Point(292, 156);
+            this.txt_model.Location = new System.Drawing.Point(264, 159);
             this.txt_model.Margin = new System.Windows.Forms.Padding(2);
             this.txt_model.Name = "txt_model";
-            this.txt_model.Size = new System.Drawing.Size(158, 20);
-            this.txt_model.TabIndex = 9;
+            this.txt_model.Size = new System.Drawing.Size(198, 20);
+            this.txt_model.TabIndex = 3;
             this.txt_model.TabStop = false;
             // 
             // label3
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(215, 153);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(167, 157);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 22);
+            this.label3.Size = new System.Drawing.Size(57, 25);
             this.label3.TabIndex = 8;
             this.label3.Text = "Model";
             // 
             // cmb_category
             // 
             this.cmb_category.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cmb_category.Location = new System.Drawing.Point(584, 122);
+            this.cmb_category.Location = new System.Drawing.Point(617, 120);
             this.cmb_category.Margin = new System.Windows.Forms.Padding(2);
             this.cmb_category.Name = "cmb_category";
-            this.cmb_category.Size = new System.Drawing.Size(151, 20);
-            this.cmb_category.TabIndex = 7;
+            this.cmb_category.Size = new System.Drawing.Size(211, 20);
+            this.cmb_category.TabIndex = 2;
             // 
             // label2
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(492, 120);
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(515, 118);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(75, 22);
+            this.label2.Size = new System.Drawing.Size(78, 25);
             this.label2.TabIndex = 6;
             this.label2.Text = "Category";
             // 
             // cmb_company
             // 
             this.cmb_company.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cmb_company.Location = new System.Drawing.Point(292, 122);
+            this.cmb_company.Location = new System.Drawing.Point(264, 120);
             this.cmb_company.Margin = new System.Windows.Forms.Padding(2);
             this.cmb_company.Name = "cmb_company";
-            this.cmb_company.Size = new System.Drawing.Size(158, 20);
-            this.cmb_company.TabIndex = 5;
+            this.cmb_company.Size = new System.Drawing.Size(198, 20);
+            this.cmb_company.TabIndex = 1;
             this.cmb_company.SelectedIndexChanged += new Telerik.WinControls.UI.Data.PositionChangedEventHandler(this.cmb_company_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(207, 120);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(167, 118);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 22);
+            this.label1.Size = new System.Drawing.Size(81, 25);
             this.label1.TabIndex = 4;
             this.label1.Text = "Company";
             // 
@@ -205,7 +206,7 @@ namespace JapanElectronics_POS.Forms
             this.panel2.Location = new System.Drawing.Point(0, 221);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(930, 587);
+            this.panel2.Size = new System.Drawing.Size(954, 689);
             this.panel2.TabIndex = 1;
             // 
             // dgv_models
@@ -218,23 +219,28 @@ namespace JapanElectronics_POS.Forms
             // 
             this.dgv_models.MasterTemplate.AllowAddNewRow = false;
             this.dgv_models.MasterTemplate.AutoSizeColumnsMode = Telerik.WinControls.UI.GridViewAutoSizeColumnsMode.Fill;
-            gridViewTextBoxColumn1.HeaderText = "Company Name";
-            gridViewTextBoxColumn1.Name = "CompanyName";
-            gridViewTextBoxColumn1.Width = 305;
-            gridViewTextBoxColumn2.HeaderText = "Category Name";
-            gridViewTextBoxColumn2.Name = "CategoryName";
-            gridViewTextBoxColumn2.Width = 305;
-            gridViewTextBoxColumn3.HeaderText = "Model Name";
-            gridViewTextBoxColumn3.Name = "ModelName";
-            gridViewTextBoxColumn3.Width = 301;
+            gridViewTextBoxColumn1.HeaderText = "ModelID";
+            gridViewTextBoxColumn1.Name = "ModelID";
+            gridViewTextBoxColumn1.Width = 48;
+            gridViewTextBoxColumn2.HeaderText = "Company Name";
+            gridViewTextBoxColumn2.Name = "CompanyName";
+            gridViewTextBoxColumn2.Width = 298;
+            gridViewTextBoxColumn3.HeaderText = "Category Name";
+            gridViewTextBoxColumn3.Name = "CategoryName";
+            gridViewTextBoxColumn3.Width = 298;
+            gridViewTextBoxColumn4.HeaderText = "Model Name";
+            gridViewTextBoxColumn4.Name = "ModelName";
+            gridViewTextBoxColumn4.Width = 292;
             this.dgv_models.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
             gridViewTextBoxColumn1,
             gridViewTextBoxColumn2,
-            gridViewTextBoxColumn3});
+            gridViewTextBoxColumn3,
+            gridViewTextBoxColumn4});
             this.dgv_models.MasterTemplate.EnableGrouping = false;
             this.dgv_models.Name = "dgv_models";
-            this.dgv_models.Size = new System.Drawing.Size(930, 587);
+            this.dgv_models.Size = new System.Drawing.Size(954, 689);
             this.dgv_models.TabIndex = 1;
+            this.dgv_models.CellDoubleClick += new Telerik.WinControls.UI.GridViewCellEventHandler(this.dgv_models_CellDoubleClick);
             // 
             // CategoryName
             // 
@@ -258,7 +264,7 @@ namespace JapanElectronics_POS.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(930, 808);
+            this.ClientSize = new System.Drawing.Size(954, 910);
             this.ControlBox = false;
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);

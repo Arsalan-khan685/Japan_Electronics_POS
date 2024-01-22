@@ -40,8 +40,8 @@ namespace JapanElectronics_POS.Forms
             // 
             this.btn_db_backup.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btn_db_backup.BackColor = System.Drawing.Color.DodgerBlue;
-            this.btn_db_backup.Location = new System.Drawing.Point(410, 192);
-            this.btn_db_backup.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_db_backup.Location = new System.Drawing.Point(509, 101);
+            this.btn_db_backup.Margin = new System.Windows.Forms.Padding(2);
             this.btn_db_backup.Name = "btn_db_backup";
             this.btn_db_backup.Size = new System.Drawing.Size(118, 46);
             this.btn_db_backup.TabIndex = 0;
@@ -50,11 +50,11 @@ namespace JapanElectronics_POS.Forms
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.label1.Location = new System.Drawing.Point(144, 59);
+            this.label1.Margin = new System.Windows.Forms.Padding(2);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(497, 29);
             this.label1.TabIndex = 1;
@@ -65,19 +65,18 @@ namespace JapanElectronics_POS.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(590, 374);
+            this.ClientSize = new System.Drawing.Size(779, 415);
             this.ControlBox = false;
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_db_backup);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "DB_Backup";
             // 
             // 
             // 
             this.RootElement.ApplyShapeToControl = true;
             this.Text = "Backup";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Backup_Load);
             ((System.ComponentModel.ISupportInitialize)(this.btn_db_backup)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.label1)).EndInit();

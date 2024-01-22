@@ -8,10 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Telerik.WinControls.UI;
 
 namespace JapanElectronics_POS.Forms
 {
-    public partial class Dashboard : Form
+    public partial class Dashboard : RadForm
     {
         SqlConnection conn = null;
         SqlCommand cmd = null;
@@ -20,69 +21,94 @@ namespace JapanElectronics_POS.Forms
         {
             AutoScaleMode = AutoScaleMode.None;
             InitializeComponent();
-        //    this.ControlBox = false;
-            //   Models();
         }
 
-   
         private void Dashboard_Load(object sender, EventArgs e)
         {
-
-            btn_haier.Click += Company_Click;
-            btn_dawlance.Click += Company_Click;
-            btn_pel.Click += Company_Click;
-            btn_other.Click += Company_Click;
-        }
-
-        private void Company_Click(object sender, EventArgs e)
-        {
-            Button clickedButton = (Button)sender;
-
-            // Load and display data from the database for the selected category
-            LoadDataIntoPanel(clickedButton.Text);
-        }
-
-        private void LoadDataIntoPanel(string category)
-        {
-            int CatId = 0;
-            if (category == "Haier")
-            {
-                CatId = 1;
-            }
-            else if (category == "Dawlance")
-            {
-                CatId = 2;
-            }
-            else if (category == "Other")
-            {
-                CatId = 3;
-            }
-
-
-            // Replace the connection string with your actual database connection string
           
-            string query = $"SELECT CategoryID,CategoryName FROM tbl_Category WHERE CategoryID = '{CatId}'";
+        }
 
-            using (SqlConnection conn = new SqlConnection(ConString))
+        private void btn_haier_Click(object sender, EventArgs e)
+        {
+            List<string> categoryNames = new List<string>();
+            List<string> modelNames = new List<string>();
+            List<int> totalQuantities = new List<int>();
+
+            HashSet<string> uniqueCategories = new HashSet<string>();       // test line
+
+            using (conn = new SqlConnection(ConString))
             {
-                using (SqlDataAdapter adapter = new SqlDataAdapter(query, conn))
-                {
-                    DataTable dataTable = new DataTable();
-                    adapter.Fill(dataTable);
+                string query = "Select ct.CategoryName,s.TotalQuantity,m.modelName from tbl_Stock s inner join tbl_Category ct on ct.CategoryID=s.Category_ID " +
+                                "inner join tbl_Company c on c.CompanyID = s.Company_ID " +
+                                "inner join tbl_Model m on m.ModelID=s.Model_ID where c.CompanyName = 'Dawlance' -- and s.TotalQuantity > 0 ";
 
-                    // Create and add buttons based on the data to pnl_cat
-                    foreach (DataRow row in dataTable.Rows)
-                    {
-                        Button categoryButton = new Button();
-                        categoryButton.Text = row["CategoryName"].ToString(); // Replace "ColumnName" with your actual column name
-                        categoryButton.Width = 150;
-                        categoryButton.Height = 30;
+                cmd = new SqlCommand(query, conn);
+                try
+                {
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    { 
+                        // test lines
+                        string categoryName = reader["CategoryName"].ToString();
+                        int totalQuantity = (int)reader["TotalQuantity"];
+                        string modelName = reader["ModelName"].ToString();
+
+                        // Check if the category is not already in the HashSet
+                        if (uniqueCategories.Add(categoryName))
+                        {
+                            categoryNames.Add(categoryName);
+                        }
+
+                        totalQuantities.Add(totalQuantity);
+                        modelNames.Add(modelName);
+
+                        /*
+                        // Retrieve values from the reader and add them to the lists
+                        categoryNames.Add(reader["CategoryName"].ToString());
+                        totalQuantities.Add((int)reader["TotalQuantity"]);
+                        modelNames.Add(reader["ModelName"].ToString()); */
                     }
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
             }
+        //    radLbl_Haier.Visible = true;
+            radLbl_Haier.Text = "Following Categories are present :\n";
 
+            foreach (string categoryName in categoryNames)
+            {
+                radLbl_Haier.Text += categoryName + "\n";
+            }
+        //    radLbl_Models.Visible = true;
+            radLbl_Models.Text = "Following Models are present : \n";
+
+            foreach (string models in modelNames)
+            {
+                radLbl_Models.Text += models + "\n";
+            }
         }
 
+        private void btn_dawlance_Click(object sender, EventArgs e)
+        {
+            radLbl_Haier.Visible = true;
+            radLbl_Haier.Text = "Dawlance Click";
+        }
+
+        private void btn_pel_Click(object sender, EventArgs e)
+        {
+            radLbl_Haier.Visible = true;
+            radLbl_Haier.Text = "PEL Click";
+        }
+
+        private void btn_other_Click(object sender, EventArgs e)
+        {
+            radLbl_Haier.Visible = true;
+            radLbl_Haier.Text = "Others Click";
+        }
     }
 }
 

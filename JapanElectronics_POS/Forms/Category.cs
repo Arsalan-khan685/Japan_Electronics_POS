@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JapanElectronics_POS.Utility;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,6 +21,7 @@ namespace JapanElectronics_POS.Forms
         public Category()
         {
             InitializeComponent();
+            dgv_category.Columns["CategoryID"].IsVisible = false;
 
             // dgv_category.AutoGenerateColumns = false;
             // For Suggestion and Appending of Dropdown
@@ -82,7 +84,7 @@ namespace JapanElectronics_POS.Forms
             // Create a default row for 'Select' with a value of -1
             DataRow defaultRow = data.NewRow();
             defaultRow["CompanyID"] = -1;
-            defaultRow["CompanyName"] = "Select";
+            defaultRow["CompanyName"] = "-- Select Company --";
             data.Rows.Add(defaultRow);
 
             using (conn = new SqlConnection(ConString))
@@ -104,66 +106,24 @@ namespace JapanElectronics_POS.Forms
             DataTable data = new DataTable();
             using (conn = new SqlConnection(ConString))
             {
-                string query = "select tco.CompanyName,tc.CategoryName from tbl_category tc" +
+                string query = "select tc.CategoryID,tco.CompanyName,tc.CategoryName from tbl_category tc" +
                                 " join tbl_Company tco on tc.Company_ID = tco.CompanyID";
                 using (cmd = new SqlCommand(query, conn))
                     conn.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.HasRows)
                 {
-                    // Assuming you have a DataGridView column named "CompanyName"
                     while (reader.Read())
                     {
-                        dgv_category.Rows.Add(reader["CompanyName"], reader["CategoryName"]);
+                        dgv_category.Rows.Add(reader["CategoryID"],reader["CompanyName"], reader["CategoryName"]);
                     }
                 }
             }
         }
-
-        //private void btn_Save_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        if (txt_category.Text == "")
-        //        {
-        //            MessageBox.Show("Enter Category Name");
-        //        }
-        //        else if (cmb_company.SelectedValue != null && (int)cmb_company.SelectedValue == -1)
-        //        {
-        //            MessageBox.Show("Please select a company.");
-        //        }
-        //        else
-        //        {
-        //            using (conn = new SqlConnection(ConString))
-        //            {
-        //                string query = "Insert into tbl_Category(CategoryName,Company_ID) Values(@CatName,@Company_ID)";
-        //                using (cmd = new SqlCommand(query, conn))
-        //                {
-        //                    conn.Open();
-        //                    cmd.Parameters.AddWithValue("@CatName", txt_category.Text);
-        //                    cmd.Parameters.AddWithValue("@Company_ID", cmb_company.SelectedValue);
-
-        //                    cmd.ExecuteNonQuery();
-        //                }
-        //            }
-        //            txt_category.Text = "";
-        //            cmb_company.SelectedIndex = -1;
-        //            GetAllCategories();
-        //            FillCompanies();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw;
-        //    }           
-        //}
         private void btn_back_Click(object sender, EventArgs e)
         {
             this.Close();
-         //   Dashboard dashboard = new Dashboard();
-         //   dashboard.Show();
         }
-
         private void btn_Save_Click(object sender, EventArgs e)
         {
             try
@@ -180,10 +140,12 @@ namespace JapanElectronics_POS.Forms
                 {
                     using (conn = new SqlConnection(ConString))
                     {
-                        string q = "Insert into tbl_Category(Company_ID,CategoryName) VALUES (@CompanyID,@Category)";
+                        string q = "Insert into tbl_Category(Company_ID,CategoryName,CreatedBy,CreatedDate) VALUES (@CompanyID,@Category,@CreatedBy,@CreatedDate)";
                         cmd = new SqlCommand(q, conn);
                         cmd.Parameters.AddWithValue("@CompanyID", cmb_company.SelectedValue);
                         cmd.Parameters.AddWithValue("@Category", txt_category.Text);
+                        cmd.Parameters.AddWithValue("@CreatedBy", AppSettings.AdminId);
+                        cmd.Parameters.AddWithValue("@CreatedDate", DateTime.Now );
                         conn.Open();
                         cmd.ExecuteNonQuery();
 
@@ -197,7 +159,46 @@ namespace JapanElectronics_POS.Forms
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-              //  throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void dgv_category_CellDoubleClick(object sender, GridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                GridViewRowInfo selectedRow = dgv_category.Rows[e.RowIndex];
+                DialogResult result = MessageBox.Show("Are you sure you want to delete this record?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    // Call the method to delete the record
+                    DeleteRecord(selectedRow);
+                    GetAllCategories();
+                }
+            }
+        }
+        private void DeleteRecord(GridViewRowInfo row)
+        {
+            try
+            {
+                int categoryIdToDelete = Convert.ToInt32(row.Cells["CategoryID"].Value); // Adjust the column name
+
+                using (conn = new SqlConnection(ConString))
+                {
+                    string query = "Delete from tbl_Category where CategoryID = '" + categoryIdToDelete + "' ";
+                    cmd = new SqlCommand(query, conn);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Category Deleted Succesfully");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
             finally
             {

@@ -13,4 +13,9 @@ namespace JapanElectronics_POS.Utility
             return System.Configuration.ConfigurationManager.ConnectionStrings["JapanElectornicsPOS"].ToString();
         }
     }
+    public static class AppSettings
+    {
+        public static int AdminId { get; set; }
+        public static string AdminName { get; set; }
+    }
 }

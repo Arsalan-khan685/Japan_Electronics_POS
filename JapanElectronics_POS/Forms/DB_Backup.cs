@@ -64,7 +64,7 @@ namespace JapanElectronics_POS.Forms
         {
             try
             {
-                ServerConnection serverConnection = new ServerConnection("DESKTOP-PBE25SJ\\SQLEXPRESS"); // Replace with your SQL Server name
+                ServerConnection serverConnection = new ServerConnection("ARSALAN-NSD"); // Replace with your SQL Server name
                 Server sqlServer = new Server(serverConnection);
 
                 Backup sqlBackup = new Backup

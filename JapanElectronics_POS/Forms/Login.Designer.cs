@@ -179,7 +179,6 @@ namespace JapanElectronics_POS
             // 
             this.RootElement.ApplyShapeToControl = true;
             this.Text = "Japan Electronics";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Login_Load);
             ((System.ComponentModel.ISupportInitialize)(this.panel1)).EndInit();
             this.panel1.ResumeLayout(false);

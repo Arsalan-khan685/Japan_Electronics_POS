@@ -1,5 +1,4 @@
-﻿using Microsoft.Reporting.WinForms;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,38 +12,26 @@ using Telerik.WinControls.UI;
 
 namespace JapanElectronics_POS.Forms
 {
-    public partial class rpt_Stocks : RadForm
+    public partial class Dashboard_Backup : RadForm
     {
         SqlConnection conn = null;
         SqlCommand cmd = null;
         string ConString = Utility.Utility.GetConnectionString();
-        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
-
-        public rpt_Stocks()
+        public Dashboard_Backup()
         {
-            AutoScaleMode = AutoScaleMode.None;
-            reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
-            reportViewer1.Dock = DockStyle.Fill;
-            this.Controls.Add(reportViewer1);
-
             InitializeComponent();
             InitializeForm();
         }
-        private void rpt_Stocks_Load(object sender, EventArgs e)
-        {
-            this.ControlBox = false;         
-        }
-        public void InitializeForm()
+        private void InitializeForm()
         {
             cmb_company.DisplayMember = "CompanyName";
             cmb_company.ValueMember = "CompanyID";
             cmb_category.DisplayMember = "CategoryName";
             cmb_category.ValueMember = "CategoryID";
-            cmb_model.DisplayMember = "ModelName";
-            cmb_model.ValueMember = "ModelID";
-            FillCompanies();
+
+            Fill_Companies();
         }
-        public void FillCompanies()
+        private void Fill_Companies()
         {
             DataTable data = new DataTable();
 
@@ -60,44 +47,19 @@ namespace JapanElectronics_POS.Forms
             using (conn = new SqlConnection(ConString))
             {
                 string query = "Select * from tbl_Company";
+
                 using (cmd = new SqlCommand(query, conn))
                 {
                     conn.Open();
                     data.Load(cmd.ExecuteReader());
                 }
             }
+
             cmb_company.DataSource = data;
             cmb_company.DisplayMember = "CompanyName";
             cmb_company.ValueMember = "CompanyID";
         }
-        private void btn_report_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                using(conn = new SqlConnection(ConString))
-                {
-                    SqlCommand cmd = new SqlCommand("Stp_rptStocks", conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Company_ID", cmb_company.SelectedValue.ToString() != "-1" ? (object)cmb_company.SelectedValue : DBNull.Value);
-                    cmd.Parameters.AddWithValue("@Category_ID", cmb_category.SelectedValue.ToString() != "-1" ? (object)cmb_category.SelectedValue : DBNull.Value);
-                    cmd.Parameters.AddWithValue("@Model_ID", cmb_model.SelectedValue.ToString() != "-1" ? (object)cmb_model.SelectedValue : DBNull.Value);
-
-                    SqlDataAdapter ad = new SqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
-                    ad.Fill(dt);
-                    reportViewer1.LocalReport.DataSources.Clear();
-                    ReportDataSource source = new ReportDataSource("DataSet1",dt);
-                    reportViewer1.LocalReport.ReportPath = "StockReport.rdlc";
-                    reportViewer1.LocalReport.DataSources.Add(source);
-                    reportViewer1.RefreshReport();                   
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-        public void FillCategories()
+        public void Fill_Categories()
         {
             DataTable data = new DataTable();
 
@@ -121,18 +83,18 @@ namespace JapanElectronics_POS.Forms
                     data.Load(cmd.ExecuteReader());
                 }
             }
-
             cmb_category.DataSource = data;
             cmb_category.DisplayMember = "CategoryName";
             cmb_category.ValueMember = "CategoryID";
         }
-        public void FillModels()
+        public void Fill_Models()
         {
             DataTable data = new DataTable();
 
             data.Columns.Add("ModelID", typeof(int));
             data.Columns.Add("ModelName", typeof(string));
 
+            // Create a default row for 'Select' with a value of -1
             DataRow defaultRow = data.NewRow();
             defaultRow["ModelID"] = -1;
             defaultRow["ModelName"] = "-- Select Model --";
@@ -150,18 +112,82 @@ namespace JapanElectronics_POS.Forms
                     data.Load(cmd.ExecuteReader());
                 }
             }
-            cmb_model.DataSource = data;
-            cmb_model.DisplayMember = "ModelName";
-            cmb_model.ValueMember = "ModelID";
-        }
 
+            cmb_models.DataSource = data;
+            cmb_models.DisplayMember = "ModelName";
+            cmb_models.ValueMember = "ModelID";
+        }
+        private void btn_Save_Click(object sender, EventArgs e)
+        {
+            dgv_items.Rows.Clear();
+            try
+            {
+                if (cmb_company.SelectedValue != null && (int)cmb_company.SelectedValue == -1)
+                {
+                    MessageBox.Show("Please select a company to show items in that company.");
+                }
+                else
+                {
+                    using (conn = new SqlConnection(ConString))
+                    {
+                        string q = "Select c.CompanyName,ct.CategoryName,m.modelName,s.TotalQuantity from tbl_Stock " +
+                                     " s inner join tbl_Category ct on ct.CategoryID = s.Category_ID " +
+                                     " inner join tbl_Company c on c.CompanyID = s.Company_ID " +
+                                     " inner join tbl_Model m on m.ModelID = s.Model_ID " +
+                                     " where c.CompanyID = @Company_ID ";
+                        if (cmb_category.SelectedValue != null && Convert.ToInt32(cmb_category.SelectedValue) != -1)
+                        {
+                            q += " AND ct.CategoryID = @Category_ID";
+                        }
+                        if (cmb_models.SelectedValue != null && Convert.ToInt32(cmb_models.SelectedValue) != -1)
+                        {
+                            q += " AND m.ModelID = @Model_ID";
+                        }
+                        q += " AND s.TotalQuantity > 0";
+                        cmd = new SqlCommand(q, conn);
+                        conn.Open();
+                        cmd.Parameters.AddWithValue("@Company_ID", cmb_company.SelectedValue);
+                        if (cmb_category.SelectedValue != null && Convert.ToInt32(cmb_category.SelectedValue) != -1)
+                        {
+                            cmd.Parameters.AddWithValue("@Category_ID", cmb_category.SelectedValue);
+                        }
+
+                        if (cmb_models.SelectedValue != null && Convert.ToInt32(cmb_models.SelectedValue) != -1)
+                        {
+                            cmd.Parameters.AddWithValue("@Model_ID", cmb_models.SelectedValue);
+                        }
+
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        if (reader.HasRows)
+                        {
+                            // Assuming you have a DataGridView column named "CompanyName"
+                            while (reader.Read())
+                            {
+                                dgv_items.Rows.Add(reader["CompanyName"], reader["CategoryName"], reader["ModelName"], reader["TotalQuantity"]);
+                            }
+                        }
+                    }
+                    cmb_company.SelectedValue = "-1";
+                    cmb_category.SelectedValue = "-1";
+                    cmb_models.SelectedValue = "-1";
+                }
+            }
+            catch (Exception ex)
+            {   
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }   
+        private void btn_back_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
         private void cmb_company_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
-            FillCategories();
+            Fill_Categories();
         }
         private void cmb_category_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
-            FillModels();
+            Fill_Models();
         }
 
     }

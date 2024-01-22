@@ -28,20 +28,17 @@ namespace JapanElectronics_POS.Forms
             InitializeComponent();
             txt_date.Text = DateTime.Now.ToString();
         }
-
         private void CustomerBill_Load(object sender, EventArgs e)
         {
-            this.ControlBox = false;
-           // this.reportViewer1.RefreshReport();         
+            this.ControlBox = false;    
         }
-
         private void btn_save_Click(object sender, EventArgs e)
         {
             try
             {
                 using (conn = new SqlConnection(ConString))
                 {
-                    SqlCommand cmd = new SqlCommand("Stp_CustomerBill", conn);
+                    cmd = new SqlCommand("Stp_CustomerBill", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
                     if (txt_username.Text == "")
                     {
@@ -59,8 +56,6 @@ namespace JapanElectronics_POS.Forms
                     {
                         cmd.Parameters.AddWithValue("@CNIC", DBNull.Value);
                     }
-
-                    // Check if BillDate is provided, otherwise, pass null
                     if (DateTime.TryParse(txt_date.Text, out DateTime date))
                     {
                         cmd.Parameters.AddWithValue("@BillDate", date);
@@ -84,5 +79,6 @@ namespace JapanElectronics_POS.Forms
                 MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
     }
 }

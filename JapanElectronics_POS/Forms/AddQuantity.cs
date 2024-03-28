@@ -160,10 +160,30 @@ namespace JapanElectronics_POS.Forms
             cmb_model.DisplayMember = "ModelName";
             cmb_model.ValueMember = "ModelID";
         }
-        private void btn_back_Click(object sender, EventArgs e)
+        
+        private void cmb_company_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
         {
-            this.Close();
+            Fill_Categories();
         }
+        private void cmb_category_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        {
+            Fill_Models();
+        }
+
+        private void txt_quantity_TextChanged(object sender, EventArgs e)
+        {
+            if (txt_quantity.Text != "")
+            {
+                decimal uprice = Convert.ToDecimal(txt_unitprice.Text);
+                int qty = Convert.ToInt32(txt_quantity.Text);
+                txt_totalprice.Text = Convert.ToString(uprice * qty);
+            }
+            else
+            {
+                txt_totalprice.Text = txt_unitprice.Text;
+            }
+        }
+
         private void btn_save_Click(object sender, EventArgs e)
         {
             try
@@ -212,7 +232,7 @@ namespace JapanElectronics_POS.Forms
                             MessageBox.Show("Quantity Added Succesfully");
                             txt_unitprice.Text = "";
                             txt_quantity.Text = "";
-                            txt_totalprice.Text = "";                            
+                            txt_totalprice.Text = "";
                             Fill_Companies();
                         }
                     }
@@ -222,32 +242,15 @@ namespace JapanElectronics_POS.Forms
             {
                 MessageBox.Show(ex.Message);
             }
-            finally 
+            finally
             {
                 conn.Close();
             }
-        }    
-        private void txt_quantity_TextChanged(object sender, EventArgs e)
-        {
-            if (txt_quantity.Text != "")
-            {
-                decimal uprice = Convert.ToDecimal(txt_unitprice.Text);
-                int qty = Convert.ToInt32(txt_quantity.Text);
-                txt_totalprice.Text = Convert.ToString(uprice * qty);
-            }
-            else 
-            {
-                txt_totalprice.Text = txt_unitprice.Text;
-            }
-        }
-        private void cmb_company_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
-        {
-            Fill_Categories();
-        }
-        private void cmb_category_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
-        {
-            Fill_Models();
         }
 
+        private void btn_back_Click(object sender, EventArgs e)
+        {
+           this.Close();
+        }
     }
 }

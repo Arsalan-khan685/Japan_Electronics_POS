@@ -43,6 +43,7 @@ namespace JapanElectronics_POS.Forms
                     if (txt_username.Text == "")
                     {
                         MessageBox.Show("Please Enter Custome Name");
+                        cmd.Parameters.AddWithValue("@Name", DBNull.Value);
                     }
                     else
                     {

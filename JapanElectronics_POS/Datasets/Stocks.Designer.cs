@@ -322,6 +322,10 @@ namespace JapanElectronics_POS.Datasets {
             
             private global::System.Data.DataColumn columnTotalQuantity;
             
+            private global::System.Data.DataColumn columnUnitPrice;
+            
+            private global::System.Data.DataColumn columnTotalPrice;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public StocksDetailReportDataTable() {
@@ -389,6 +393,22 @@ namespace JapanElectronics_POS.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn UnitPriceColumn {
+                get {
+                    return this.columnUnitPrice;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn TotalPriceColumn {
+                get {
+                    return this.columnTotalPrice;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -424,13 +444,15 @@ namespace JapanElectronics_POS.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public StocksDetailReportRow AddStocksDetailReportRow(string CompanyName, string CategoryName, string ModelName, string TotalQuantity) {
+            public StocksDetailReportRow AddStocksDetailReportRow(string CompanyName, string CategoryName, string ModelName, string TotalQuantity, string UnitPrice, string TotalPrice) {
                 StocksDetailReportRow rowStocksDetailReportRow = ((StocksDetailReportRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         CompanyName,
                         CategoryName,
                         ModelName,
-                        TotalQuantity};
+                        TotalQuantity,
+                        UnitPrice,
+                        TotalPrice};
                 rowStocksDetailReportRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowStocksDetailReportRow);
                 return rowStocksDetailReportRow;
@@ -457,6 +479,8 @@ namespace JapanElectronics_POS.Datasets {
                 this.columnCategoryName = base.Columns["CategoryName"];
                 this.columnModelName = base.Columns["ModelName"];
                 this.columnTotalQuantity = base.Columns["TotalQuantity"];
+                this.columnUnitPrice = base.Columns["UnitPrice"];
+                this.columnTotalPrice = base.Columns["TotalPrice"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -470,6 +494,10 @@ namespace JapanElectronics_POS.Datasets {
                 base.Columns.Add(this.columnModelName);
                 this.columnTotalQuantity = new global::System.Data.DataColumn("TotalQuantity", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTotalQuantity);
+                this.columnUnitPrice = new global::System.Data.DataColumn("UnitPrice", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUnitPrice);
+                this.columnTotalPrice = new global::System.Data.DataColumn("TotalPrice", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotalPrice);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1036,6 +1064,38 @@ namespace JapanElectronics_POS.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string UnitPrice {
+                get {
+                    try {
+                        return ((string)(this[this.tableStocksDetailReport.UnitPriceColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'UnitPrice\' in table \'StocksDetailReport\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableStocksDetailReport.UnitPriceColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string TotalPrice {
+                get {
+                    try {
+                        return ((string)(this[this.tableStocksDetailReport.TotalPriceColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TotalPrice\' in table \'StocksDetailReport\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableStocksDetailReport.TotalPriceColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsCompanyNameNull() {
                 return this.IsNull(this.tableStocksDetailReport.CompanyNameColumn);
             }
@@ -1080,6 +1140,30 @@ namespace JapanElectronics_POS.Datasets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetTotalQuantityNull() {
                 this[this.tableStocksDetailReport.TotalQuantityColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsUnitPriceNull() {
+                return this.IsNull(this.tableStocksDetailReport.UnitPriceColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetUnitPriceNull() {
+                this[this.tableStocksDetailReport.UnitPriceColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsTotalPriceNull() {
+                return this.IsNull(this.tableStocksDetailReport.TotalPriceColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetTotalPriceNull() {
+                this[this.tableStocksDetailReport.TotalPriceColumn] = global::System.Convert.DBNull;
             }
         }
         

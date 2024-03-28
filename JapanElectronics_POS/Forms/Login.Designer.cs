@@ -142,7 +142,6 @@ namespace JapanElectronics_POS
             this.txt_password.Size = new System.Drawing.Size(220, 20);
             this.txt_password.TabIndex = 3;
             this.txt_password.TabStop = false;
-            this.txt_password.Text = "1234";
             // 
             // txt_adminname
             // 
@@ -152,7 +151,6 @@ namespace JapanElectronics_POS
             this.txt_adminname.Size = new System.Drawing.Size(220, 20);
             this.txt_adminname.TabIndex = 2;
             this.txt_adminname.TabStop = false;
-            this.txt_adminname.Text = "arsalan";
             // 
             // label2
             // 

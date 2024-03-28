@@ -28,6 +28,7 @@ namespace JapanElectronics_POS.Forms
             txt_unitprice.KeyPress += Txt_unitprice_KeyPress;
             txt_totalprice.KeyPress += Txt_totalprice_KeyPress;
             txt_date.Text = DateTime.Now.ToString();
+           // FillItems();
         }
 
         private void Txt_totalprice_KeyPress(object sender, KeyPressEventArgs e)
@@ -83,12 +84,13 @@ namespace JapanElectronics_POS.Forms
 
             DataRow defaultRow = data.NewRow();
             defaultRow["ModelID"] = -1;
-            defaultRow["ModelName"] = "Select Model";
+            defaultRow["ModelName"] = "-- Select Model --";
             data.Rows.Add(defaultRow);
 
             using (conn = new SqlConnection(ConString))
             {
-                string query = "Select * from tbl_Model";
+                string query = "Select m.ModelID,m.ModelName from tbl_Model m inner join tbl_Stock s on s.Model_ID=m.ModelID " +
+                                    " Where s.TotalQuantity > 0";
 
                 using (cmd = new SqlCommand(query, conn))
                 {
@@ -102,17 +104,19 @@ namespace JapanElectronics_POS.Forms
         }
         public void Clear()
         {
-            txt_username.Text = "";
-            txt_cnic.Text = "";
+          //  txt_username.Text = "";
+         //   txt_cnic.Text = "";
             cmb_models.SelectedValue = "-1";
             txt_unitprice.Text = "";
             txt_totalprice.Text = "";
             txt_quantity.Text = "";
         }
-        private void btn_back_Click(object sender, EventArgs e)
+        
+        private void Sales_form_Load(object sender, EventArgs e)
         {
-            this.Close();
+
         }
+        
         private void btn_save_Click(object sender, EventArgs e)
         {
             try
@@ -159,11 +163,16 @@ namespace JapanElectronics_POS.Forms
                             MessageBox.Show("Invalid date format");
                             return;
                         }
-                        cmd.Parameters.AddWithValue("@AdminId",AppSettings.AdminId);
+                        cmd.Parameters.AddWithValue("@AdminId", AppSettings.AdminId);
+                        SqlParameter outputParameter = new SqlParameter("@Result", SqlDbType.VarChar, 255);
+                        outputParameter.Direction = ParameterDirection.Output;
+                        cmd.Parameters.Add(outputParameter);                       
+
                         conn.Open();
                         cmd.ExecuteNonQuery();
+                        string outputMessage = outputParameter.Value.ToString();
                         Clear();
-                        MessageBox.Show("Record Saved Succesfully");
+                        MessageBox.Show(outputMessage);
                     }
                 }
             }
@@ -172,10 +181,12 @@ namespace JapanElectronics_POS.Forms
                 MessageBox.Show(ex.Message);
             }
         }
-        private void Sales_form_Load(object sender, EventArgs e)
-        {
 
+        private void btn_back_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
+
         private void txt_quantity_TextChanged(object sender, EventArgs e)
         {
             if (txt_quantity.Text != "")
@@ -189,6 +200,5 @@ namespace JapanElectronics_POS.Forms
                 txt_totalprice.Text = txt_unitprice.Text;
             }
         }
-
     }
 }

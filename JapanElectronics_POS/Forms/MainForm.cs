@@ -13,8 +13,7 @@ using Telerik.WinControls.UI;
 namespace JapanElectronics_POS.Forms
 {
     public partial class MainForm : RadForm
-    {
-        Dashboard dashboard;
+    {       
         Company company;
         Category category;
         Models models;
@@ -51,6 +50,12 @@ namespace JapanElectronics_POS.Forms
 
         private void btn_dashboard_Click(object sender, EventArgs e)
         {
+            company = null;
+            category = null;
+            models = null;
+            addQuantity = null;
+            sales = null;
+            stocks = null;
             if (db == null)
             {
                 db = new Dashboard_Backup();
@@ -69,7 +74,12 @@ namespace JapanElectronics_POS.Forms
             db = null;
         }        
         private void btn_company_Click(object sender, EventArgs e)
-        {
+        {            
+            category = null;
+            models = null;
+            addQuantity = null;
+            sales = null;
+            stocks = null;
             if (company == null)
             {
                 company = new Company();
@@ -93,6 +103,11 @@ namespace JapanElectronics_POS.Forms
 
         private void btn_category_Click(object sender, EventArgs e)
         {
+            company = null;
+            models = null;
+            addQuantity = null;
+            sales = null;
+            stocks = null;
             if (category == null)
             {
                 category = new Category();
@@ -116,6 +131,11 @@ namespace JapanElectronics_POS.Forms
 
         private void btn_Model_Click(object sender, EventArgs e)
         {
+            company = null;
+            category = null;
+            addQuantity = null;
+            sales = null;
+            stocks = null;
             if (models == null)
             {
                 models = new Models();
@@ -139,6 +159,11 @@ namespace JapanElectronics_POS.Forms
 
         private void btn_addstocks_Click(object sender, EventArgs e)
         {
+            company = null;
+            category = null;
+            models = null;
+            addQuantity = null;
+            sales = null;
             if (addQuantity == null)
             {
                 addQuantity = new AddQuantity();
@@ -161,6 +186,11 @@ namespace JapanElectronics_POS.Forms
 
         private void btn_Sales_Click(object sender, EventArgs e)
         {
+            company = null;
+            category = null;
+            models = null;
+            addQuantity = null;
+            stocks = null;
             if (sales == null)
             {
                 sales = new Sales_form();
@@ -247,9 +277,7 @@ namespace JapanElectronics_POS.Forms
         {
             backup = null;
         }
-
-        
-
+       
         //private void ClearControls(Control.ControlCollection controls)
         //{
         //    foreach (Control ctrl in controls)

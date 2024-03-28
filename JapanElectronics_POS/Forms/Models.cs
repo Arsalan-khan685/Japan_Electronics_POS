@@ -210,5 +210,6 @@ namespace JapanElectronics_POS.Forms
                 conn.Close();
             }
         }
+
     }
 }
